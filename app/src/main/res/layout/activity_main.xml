@@ -7,7 +7,7 @@
     tools:context="com.example.kinga.calculatorrpn.MainActivity">
 
     <GridLayout
-        android:id="@+id/gridLayout"
+        android:id="@+id/controlsPanel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8sp"
@@ -16,7 +16,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gridLayout2">
+        app:layout_constraintTop_toBottomOf="@+id/screenPanel">
 
         <Button
             android:id="@+id/button7"
@@ -219,7 +219,7 @@
     </GridLayout>
 
     <GridLayout
-        android:id="@+id/gridLayout2"
+        android:id="@+id/screenPanel"
         android:layout_width="344sp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8sp"
@@ -228,7 +228,7 @@
         android:layout_marginTop="8sp"
         android:background="#8FBC8F"
         android:columnCount="2"
-        app:layout_constraintBottom_toTopOf="@+id/gridLayout"
+        app:layout_constraintBottom_toTopOf="@+id/controlsPanel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">

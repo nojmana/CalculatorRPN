@@ -72,27 +72,49 @@ class MainActivity : AppCompatActivity() {
         buttonEnter.setOnClickListener {
             if (currValue.isNotEmpty()) {
                 stack.push(currValue.toDouble())
-                Log.i(TAG, stack.size.toString())
+                //Log.i(TAG, stack.size.toString())
                 if (stack1Label.text == "1:") {
-                    stack4Label.text = stack3Label.text
-                    stack3Label.text = stack2Label.text
-                    stack2Label.text = stack1Label.text
-                    stack1Label.text = "->"
-                    if (stack.size > 3) stack4Text.text = stack[stack.size-4].toString()
-                    if (stack.size > 2) stack3Text.text = stack[stack.size-3].toString()
-                    if (stack.size > 1) stack2Text.text = stack[stack.size-2].toString()
-                    if (stack.size > 0) stack1Text.text = stack[stack.size-1].toString()
+                    changeLabelsToNewNumber()
+                    printStack()
                 } else if (stack1Label.text == "->"){
                     stack4Label.text = "4: "
                     stack3Label.text = "3: "
                     stack2Label.text = "2: "
                     stack1Label.text = "1: "
-                    if (stack.size > 3) stack4Text.text = stack[stack.size-4].toString()
-                    if (stack.size > 2) stack3Text.text = stack[stack.size-3].toString()
-                    if (stack.size > 1) stack2Text.text = stack[stack.size-2].toString()
-                    if (stack.size > 0) stack1Text.text = stack[stack.size-1].toString()
+                    printStack()
                 }
                 currValue = ""
+            }
+        }
+
+        buttonDrop.setOnClickListener {
+            if (stack.size > 0) stack.removeAt(stack.size - 1)
+                printStack()
+        }
+
+        buttonSwap.setOnClickListener {
+            if (stack.size > 1) {
+                var temp = stack[stack.size-1]
+                stack[stack.size - 1] = stack[stack.size - 2]
+                stack[stack.size - 2] = temp
+                printStack()
+            }
+        }
+
+        buttonAC.setOnClickListener {
+            stack.clear()
+            printStack()
+        }
+
+        buttonChangeSign.setOnClickListener {
+            if (stack.size > 1) stack[stack.size - 1] = - stack[stack.size - 1]
+            printStack()
+        }
+
+        buttonUndo.setOnClickListener {
+            if (currValue.length > 0) {
+                currValue = currValue.substring(0, currValue.length - 1)
+                updateScreen()
             }
         }
     }
@@ -100,16 +122,31 @@ class MainActivity : AppCompatActivity() {
     fun updateScreen() {
         if (currValue.isNotEmpty()) {
             if (stack1Label.text != "->") {
-                stack4Label.text = stack3Label.text
-                stack3Label.text = stack2Label.text
-                stack2Label.text = stack1Label.text
-                stack1Label.text = "->"
+                changeLabelsToNewNumber()
                 if (stack.size > 2) stack4Text.text = stack[stack.size-3].toString()
                 if (stack.size > 1) stack3Text.text = stack[stack.size-2].toString()
                 if (stack.size > 0) stack2Text.text = stack[stack.size-1].toString()
             }
             stack1Text.text = currValue
         }
+    }
+
+    fun changeLabelsToNewNumber() {
+        stack4Label.text = stack3Label.text
+        stack3Label.text = stack2Label.text
+        stack2Label.text = stack1Label.text
+        stack1Label.text = "->"
+    }
+
+    fun printStack() {
+        if (stack.size > 3) stack4Text.text = stack[stack.size - 4].toString()
+        else stack4Text.text = ""
+        if (stack.size > 2) stack3Text.text = stack[stack.size - 3].toString()
+        else stack3Text.text = ""
+        if (stack.size > 1) stack2Text.text = stack[stack.size - 2].toString()
+        else stack2Text.text = ""
+        if (stack.size > 0) stack1Text.text = stack[stack.size - 1].toString()
+        else stack1Text.text = ""
     }
 
 }
