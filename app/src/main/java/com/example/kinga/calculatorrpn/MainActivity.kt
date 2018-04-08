@@ -8,6 +8,7 @@ import android.os.Bundle
 import java.util.*
 import kotlinx.android.synthetic.main.activity_main.*
 import android.content.res.Configuration.ORIENTATION_LANDSCAPE
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.support.annotation.RequiresApi
@@ -227,10 +228,9 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?){
         if(requestCode == 999 && resultCode == Activity.RESULT_OK && data != null){
             precision = data.extras.getInt("precision")
-            //screenColor = data.extras.getString("screenColor")
+            screenColor = data.extras.getString("screenColor")
+            screenPanel.setBackgroundColor(Color.parseColor("#$screenColor"))
         }
-        /*val resId = resources.getIdentifier("screenColor", "drawable", this@MainActivity.packageName)
-        screenPanel.background = this@MainActivity.resources.getDrawable(resId)*/
     if (curValue == "") printStack()
     else printStackWithCurVal()
 }

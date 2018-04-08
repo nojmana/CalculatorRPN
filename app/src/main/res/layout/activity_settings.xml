@@ -25,15 +25,27 @@
             android:layout_row="0"
             android:gravity="center_vertical"
             android:text="Precision"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
 
         <NumberPicker
             android:id="@+id/precisionNr"
             android:layout_width="wrap_content"
             android:layout_height="83dp"
             android:layout_column="1"
-            android:layout_row="0" />
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_row="0"
+            android:gravity="center_horizontal" />
 
+        <TextView
+            android:id="@+id/colorLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="90dp"
+            android:layout_gravity="fill_horizontal"
+            android:layout_column="0"
+            android:layout_row="1"
+            android:gravity="center_vertical"
+            android:text="Screen color"
+            android:textSize="20sp"/>
 
         <Button
             android:id="@+id/applyButton"
@@ -42,6 +54,14 @@
             android:layout_column="1"
             android:layout_row="23"
             android:text="Apply" />
+
+        <Spinner
+            android:id="@+id/colorMenu"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_gravity="center_vertical"
+            android:layout_row="1" />
 
 
     </GridLayout>
