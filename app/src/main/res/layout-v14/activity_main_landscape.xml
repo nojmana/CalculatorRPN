@@ -8,15 +8,16 @@
 
     <GridLayout
         android:id="@+id/controlsPanel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8sp"
+        android:layout_width="350dp"
+        android:layout_height="235dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/screenPanel">
+        app:layout_constraintStart_toEndOf="@+id/screenPanel"
+        app:layout_constraintTop_toTopOf="parent">
 
         <Button
             android:id="@+id/button7"
@@ -150,7 +151,7 @@
             android:layout_height="wrap_content"
             android:layout_column="4"
             android:layout_row="0"
-            android:text="DEL" />
+            android:text="UNDO" />
 
         <Button
             android:id="@+id/buttonExp"
@@ -220,18 +221,17 @@
 
     <GridLayout
         android:id="@+id/screenPanel"
-        android:layout_width="344sp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8sp"
-        android:layout_marginEnd="8sp"
-        android:layout_marginStart="8sp"
-        android:layout_marginTop="8sp"
+        android:layout_width="226dp"
+        android:layout_height="230dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginStart="8dp"
         android:background="#5b805b"
         android:columnCount="2"
-        app:layout_constraintBottom_toTopOf="@+id/controlsPanel"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.496">
 
         <TextView
             android:id="@+id/stack4Label"

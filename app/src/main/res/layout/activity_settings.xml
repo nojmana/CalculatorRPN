@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.kinga.calculatorrpn.SettingsActivity">
+
+    <GridLayout
+        android:layout_width="368dp"
+        android:layout_height="495dp"
+        android:alignmentMode="alignMargins"
+        android:columnCount="2"
+        android:rowCount="5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/precisionLabel"
+            android:layout_width="wrap_content"
+            android:layout_gravity="fill_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:layout_row="0"
+            android:textSize="50dp"
+            android:text="Precision" />
+
+        <NumberPicker
+            android:id="@+id/precisionNr"
+            android:layout_width="wrap_content"
+            android:layout_height="83dp"
+            android:layout_column="1"
+            android:layout_row="0" />
+
+        <TextView
+            android:id="@+id/colorLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:layout_row="5"
+            android:text="TextView" />
+    </GridLayout>
+</android.support.constraint.ConstraintLayout>
