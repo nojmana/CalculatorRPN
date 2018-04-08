@@ -1,5 +1,6 @@
 package com.example.kinga.calculatorrpn
 
+import android.app.Activity
 import android.content.Intent
 import android.util.Log
 import android.support.v7.app.AppCompatActivity
@@ -7,12 +8,19 @@ import android.os.Bundle
 import java.util.*
 import kotlinx.android.synthetic.main.activity_main.*
 import android.content.res.Configuration.ORIENTATION_LANDSCAPE
+import android.graphics.drawable.Drawable
+import android.os.Build
+import android.support.annotation.RequiresApi
+
+
 
 class MainActivity : AppCompatActivity() {
 
     private var stack = Stack<Double>()
     private var curValue = ""
     private val TAG = "StateChange"
+    private var precision = 3
+    private var screenColor = "#5b805b"
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)
@@ -22,7 +30,6 @@ class MainActivity : AppCompatActivity() {
             for (i in 0 until doubleArr.size) {
                 stack.push(doubleArr[i])
             }
-            Log.i(TAG, curValue)
             if (curValue == "") printStack()
             else printStackWithCurVal()
         };
@@ -33,9 +40,8 @@ class MainActivity : AppCompatActivity() {
         super.onSaveInstanceState(outState)
         outState!!.putString("curVal", curValue)
         outState.putDoubleArray("stack", stack.toDoubleArray())
-        var arr = stack.toDoubleArray();
-        Log.i(TAG, arr.toString())
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (resources.configuration.orientation == ORIENTATION_LANDSCAPE) {
@@ -212,18 +218,29 @@ class MainActivity : AppCompatActivity() {
         }
 
         buttonSettings.setOnClickListener {
-            val i = Intent(this, SettingsActivity::class.java)
-            i.putExtra("Parametr", "Twoje dane")
-            startActivity(i)
-        }
+        val i = Intent(this, SettingsActivity::class.java)
+        startActivityForResult(i, 999)
     }
+}
+
+    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?){
+        if(requestCode == 999 && resultCode == Activity.RESULT_OK && data != null){
+            precision = data.extras.getInt("precision")
+            screenColor = data.extras.getString("screenColor")
+        }
+        val resId = resources.getIdentifier("your_drawable_name", "drawable", this@MainActivity.packageName)
+        screenPanel.background = this@MainActivity.resources.getDrawable(resId)
+    if (curValue == "") printStack()
+    else printStackWithCurVal()
+}
 
     fun updateScreen() {
         if (stack1Label.text != "->") {
             changeLabelsToNewNumber()
-            if (stack.size > 2) stack4Text.text = stack[stack.size-3].toString()
-            if (stack.size > 1) stack3Text.text = stack[stack.size-2].toString()
-            if (stack.size > 0) stack2Text.text = stack[stack.size-1].toString()
+            if (stack.size > 2) stack4Text.text = stack[stack.size-3].format()
+            if (stack.size > 1) stack3Text.text = stack[stack.size-2].format()
+            if (stack.size > 0) stack2Text.text = stack[stack.size-1].format()
         }
         stack1Text.text = curValue
     }
@@ -243,25 +260,29 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun printStack() {
-        if (stack.size > 3) stack4Text.text = stack[stack.size - 4].toString()
+        if (stack.size > 3) stack4Text.text = stack[stack.size - 4].format()
         else stack4Text.text = ""
-        if (stack.size > 2) stack3Text.text = stack[stack.size - 3].toString()
+        if (stack.size > 2) stack3Text.text = stack[stack.size - 3].format()
         else stack3Text.text = ""
-        if (stack.size > 1) stack2Text.text = stack[stack.size - 2].toString()
+        if (stack.size > 1) stack2Text.text = stack[stack.size - 2].format()
         else stack2Text.text = ""
-        if (stack.size > 0) stack1Text.text = stack[stack.size - 1].toString()
+        if (stack.size > 0) stack1Text.text = stack[stack.size - 1].format()
         else stack1Text.text = ""
         changeLabelsToStack()
     }
 
     fun printStackWithCurVal() {
-        if (stack.size > 2) stack4Text.text = stack[stack.size - 3].toString()
+        if (stack.size > 2) stack4Text.text = stack[stack.size - 3].format()
         else stack4Text.text = ""
-        if (stack.size > 1) stack3Text.text = stack[stack.size - 2].toString()
+        if (stack.size > 1) stack3Text.text = stack[stack.size - 2].format()
         else stack3Text.text = ""
-        if (stack.size > 0) stack2Text.text = stack[stack.size - 1].toString()
+        if (stack.size > 0) stack2Text.text = stack[stack.size - 1].format()
         else stack2Text.text = ""
         stack1Text.text = curValue
         changeLabelsToNewNumber()
+    }
+
+    fun Double.format(): String {
+        return String.format("%.${precision}f", this)
     }
 }
